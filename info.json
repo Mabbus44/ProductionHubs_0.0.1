@@ -1,0 +1,10 @@
+{
+  "name": "ProductionHubs",
+  "version": "0.0.1",
+  "factorio_version": "1.1",
+  "title": "Production hubs",
+  "author": "Mabbus",
+  "contact": "rasun44@hotmail.com",
+  "dependencies": ["base >= 1.1"],
+  "description": "Create a networks of small production hubs"
+}

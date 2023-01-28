@@ -1,0 +1,12 @@
+TODO
+* Unbuildable terrain, exept around resources
+* Rail, signals and powerpoles unkillable and buildable everywhere
+* Smaller starting area and small/endless resource patches
+* Main vault that has population
+* All buildings require workers
+* Send workers to attack biter bases
+* No evolution for killing biternests, only for pollution
+* Faster biter expansion when killing nests
+
+So if you dont clear camps the biter attacks will cost you resources (bullets)
+Clearing the camps will cost you people.
