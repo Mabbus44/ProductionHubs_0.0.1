@@ -172,12 +172,14 @@ function prodHubs.handleVaultButtonPress(player, element)
       player.print(prodHubs.loadTranslation(player.index,"insufficient") .. " " .. prodHubs.loadTranslation(player.index,"population"), {r=1})
       return
     end
+    local addWorkers = (patch.freePopulation == 0)
     patch.freePopulation = patch.freePopulation + (math.floor(patch.population) - patch.maxPopulation)
     patch.level = patch.level + 1
     local l = patch.level
     local lm1 = l-1
     local incPop = ((l*l)-(lm1*lm1))*100
     patch.maxPopulation = patch.maxPopulation + incPop
+    if addWorkers and patch.freePopulation > 0 then prodHubs.addWorkersToAllUnits(patch) end
     player.print(prodHubs.loadTranslation(player.index,"prodHubs-vault") .. " " .. prodHubs.loadTranslation(player.index,"leveled_up"), {g=1})
     prodHubs.updateVaultGui(player)
   elseif element.name == "deployUnitsButton" then
