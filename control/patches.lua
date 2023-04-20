@@ -60,7 +60,7 @@ function BuildablePatch:findNeighbours(x, y, surface)
 				findY = y + dy
 				tile = surface.get_tile(findX, findY)
 				if tile.valid then
-					if string.find(tile.name, "red") then self:addTile(findX, findY, surface) end
+					if string.find(tile.name, "red") or string.find(tile.name, "sand") then self:addTile(findX, findY, surface) end
 				else
 					self.cannotFinish = true
 				end
@@ -101,8 +101,8 @@ function BuildablePatch:generateResources(surface, isStartingPatch)
 		end
 	else
 		availableResources = {RESOURCE.IRON, RESOURCE.COPPER, RESOURCE.COAL, RESOURCE.STONE}
-		if self.dist > 2000 then table.insert(availableResources, RESOURCE.OIL) end
-		if self.dist > 3000 then table.insert(availableResources, RESOURCE.URANIUM) end
+		if self.dist > 500 then table.insert(availableResources, RESOURCE.OIL) end
+		if self.dist > 1000 then table.insert(availableResources, RESOURCE.URANIUM) end
 		randomResource = global.rng(#availableResources)
 		
 		resourceCount = global.rng(20) + 10
@@ -205,7 +205,7 @@ function prodHubs.generateWorldMap()
 	surface.clear(true)
 	local mgs = surface.map_gen_settings
   prodHubs.addEvent(prodHubs.ticksPerSecond * 10, "adjustPopulation", {})
-	mgs.cliff_settings = {cliff_elevation_0 = 1024}
+	--mgs.cliff_settings = {cliff_elevation_0 = 1024}
 	mgs.property_expression_names["tile:grass-1:probability"] = "unBuildableTerrain"
 	mgs.property_expression_names["tile:grass-2:probability"] = "zero"
 	mgs.property_expression_names["tile:grass-3:probability"] = "zero"
@@ -222,7 +222,7 @@ function prodHubs.generateWorldMap()
 	mgs.property_expression_names["tile:dirt-6:probability"] = "zero"
 	mgs.property_expression_names["tile:dirt-7:probability"] = "zero"
 	mgs.property_expression_names["tile:sand-1:probability"] = "zero"
-	mgs.property_expression_names["tile:sand-2:probability"] = "zero"
+	mgs.property_expression_names["tile:sand-2:probability"] = "aroundSpots"
 	mgs.property_expression_names["tile:sand-3:probability"] = "zero"
 	mgs.property_expression_names["tile:dry-dirt:probability"] = "zero"
 	mgs.property_expression_names["entity:coal:probability"] = "zero"
@@ -247,7 +247,7 @@ function prodHubs.onChunkGenerated(surface, area)
 	startingPatch = nil
 	for y = minY, maxY do
 		for x = minX, maxX do
-			if string.find(surface.get_tile(x, y).name, "red") then
+			if string.find(surface.get_tile(x, y).name, "red") or string.find(surface.get_tile(x, y).name, "sand") then
 				alreadyFound = false
 				for _, v in ipairs(patches) do
 					if alreadyFound then break end

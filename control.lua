@@ -48,11 +48,14 @@ script.on_event(defines.events.on_player_created, function(event)
 	if #(global.buildablePatches) > 0 then game.players[event.player_index].insert{name="prodHubs-vault", count=1} end
 	--game.players[event.player_index].insert{name="small-electric-pole", count=20}
 	--game.players[event.player_index].insert{name="stone-furnace", count=100}
-	--game.players[event.player_index].insert{name="iron-plate", count=1000}
+	game.players[event.player_index].insert{name="iron-plate", count=1000}
+	game.players[event.player_index].insert{name="copper-plate", count=1000}
 	--game.players[event.player_index].insert{name="coal", count=700}
 	--game.players[event.player_index].insert{name="electronic-circuit", count=200}
 	--game.players[event.player_index].insert{name="iron-stick", count=1000}
 	--game.players[event.player_index].insert{name="copper-cable", count=1000}
+	--game.players[event.player_index].character = nil
+	--/c game.players[1].force.chart(game.players[1].surface, {lefttop = {x = -3000, y = -3000}, rightbottom = {x = 3000, y = 3000}})
 end)
 
 script.on_event(defines.events.on_selected_entity_changed, function(event)

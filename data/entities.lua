@@ -21,10 +21,6 @@ function editEntityGroup(entityGroup, getValueForCategryFunction, getValueForCat
 end
 
 -- Unbuildable terrain
-layer = collision_mask_util.get_first_unused_layer()
-table.insert(data.raw["tile"]["grass-1"].collision_mask, layer)
-collideWithGrass = {"accumulator", "ammo-turret", "arithmetic-combinator", "artillery-turret", "assembling-machine", "beacon", "boiler", "burner-generator", "constant-combinator", "container", "decider-combinator", "electric-turret", "fluid-turret", "furnace", "generator", "heat-pipe", "inserter", "lab", "lamp", "logistic-container", "mining-drill", "offshore-pump", "pipe", "pipe-to-ground", "programmable-speaker", "pump", "radar", "reactor", "roboport", "rocket-silo", "solar-panel", "splitter", "storage-tank", "transport-belt", "underground-belt"}
-
 function getCategoryMask(category, layer)
 	mask = collision_mask_util.get_default_mask(category)
 	table.insert(mask, layer)
@@ -35,7 +31,15 @@ function setCollisionMask(category, entity, mask)
 	data.raw[category][entity].collision_mask = mask
 end
 
-editEntityGroup(collideWithGrass, getCategoryMask, {layer}, setCollisionMask)
+local grassLayer = collision_mask_util.get_first_unused_layer()
+table.insert(data.raw["tile"]["grass-1"].collision_mask, grassLayer)
+collideWithGrass = {"accumulator", "ammo-turret", "arithmetic-combinator", "artillery-turret", "assembling-machine", "beacon", "boiler", "burner-generator", "constant-combinator", "container", "decider-combinator", "electric-turret", "fluid-turret", "furnace", "generator", "heat-pipe", "inserter", "lab", "lamp", "logistic-container", "mining-drill", "offshore-pump", "pipe", "pipe-to-ground", "programmable-speaker", "pump", "radar", "reactor", "roboport", "rocket-silo", "solar-panel", "splitter", "storage-tank", "transport-belt", "underground-belt"}
+editEntityGroup(collideWithGrass, getCategoryMask, {grassLayer}, setCollisionMask)
+
+local sandLayer = collision_mask_util.get_first_unused_layer()
+table.insert(data.raw["tile"]["sand-2"].collision_mask, sandLayer)
+collideWithSand2 = {"accumulator", "arithmetic-combinator", "artillery-turret", "assembling-machine", "beacon", "boiler", "burner-generator", "constant-combinator", "decider-combinator", "furnace", "generator", "heat-pipe", "lab", "lamp", "mining-drill", "offshore-pump", "programmable-speaker", "radar", "reactor", "roboport", "rocket-silo", "solar-panel"}
+editEntityGroup(collideWithSand2, getCategoryMask, {sandLayer}, setCollisionMask)
 
 -- Infinite resources
 for k, v in pairs(data.raw.resource) do
@@ -71,6 +75,7 @@ vault.collision_box = {{-1.7, -1.7}, {1.7, 1.7}}
 vault.selection_box = {{-2, -2}, {2, 2}}
 vault.inventory_type = "with_filters_and_bar"
 vault.minable.result = "prodHubs-vault"
+table.insert(vault.collision_mask, sandLayer)
 data:extend{vault}
 
 -- Electric mining drill

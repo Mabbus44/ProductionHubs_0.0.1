@@ -48,12 +48,23 @@ local function sqrt(a)
 	}
 end
 
+local randomFactor = {
+	type = "function-application",
+	function_name = "random-penalty",
+	arguments = {
+		x = noise.var("x"),
+		y = noise.var("y"),
+		source = tne(1.0),
+		amplitude = tne(0.6)
+	}
+}
+
 local function regionSize()
-	return tne(512)
+	return tne(1024)
 end
 
 local function maxDist()
-	return tne(10000)
+	return tne(20000)
 end
 
 local function decreaseSpotsDist()
@@ -61,11 +72,11 @@ local function decreaseSpotsDist()
 end
 
 local function minRadius()
-	return tne(25)
+	return tne(50)
 end
 
 local function maxRadiusInc()
-	return tne(60)
+	return tne(200)
 end
 
 local function dist()
@@ -75,9 +86,10 @@ local function dist()
 end
 
 local function spotRadius()
-	return add( mul(div(dist(), maxDist()),
-									maxRadiusInc()),
-							minRadius())
+	return  mul(add(mul(div(dist(), maxDist()),
+											maxRadiusInc()),
+									minRadius()),
+							randomFactor)
 end
 
 local function spotQuantity()
@@ -135,7 +147,7 @@ local spotNoise = {
 		region_size = regionSize(),
 		skip_offset = tne(0),
 		skip_span = tne(1),
-		candidate_point_count = tne(64),
+		candidate_point_count = tne(36),
 		suggested_minimum_candidate_point_spacing = tne(150),
 		hard_region_target_quantity = tne(false),
 		density_expression = {
@@ -163,7 +175,17 @@ data:extend{
   {
 		type = "noise-expression",
 		name = "spots",
-		expression = max(spotNoise, mul(less_than(dist(), tne(20)), tne(2)))
+		expression = max(mul(less_than(tne(0.15), spotNoise), tne(0.9)), mul(less_than(dist(), tne(20)), tne(2)))
+  },
+  {
+		type = "noise-expression",
+		name = "myrand",
+		expression = randomFactor
+  },
+  {
+		type = "noise-expression",
+		name = "aroundSpots",
+		expression = max(mul(less_than(tne(0.1), spotNoise), tne(0.8)), mul(less_than(dist(), tne(25)), tne(2)))
   },
   {
 		type = "noise-expression",

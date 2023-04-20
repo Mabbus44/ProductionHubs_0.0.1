@@ -30,10 +30,18 @@ x biters arent fighting very good
 x Buy population cost should depend on population, not level
 
 v 1.0
-* Fixed bug: When you leveled up with no free population it it did not assign workers
-* Removed recepies for weaponds (except pistol)
+x Fixed bug: When you leveled up with no free population it it did not assign workers
+x Removed recepies for weaponds (except pistol)
+
+v 1.1
+x Patches bigger and fewer
+x Patch size slightly randomized
+x Decresed min distance form center where oil and uranium can spawn
+x Added area around patched where you can build belts, inserters, pipes and towers
 
 TODO:
 * Tutorial
 * Notification when vault can level up
 * Autoplace rail blueprints from inventory?
+* Choose if idle workers should boost mining, research or military
+* Military all starts as small biters, spending idle workers on military increase quality of military.
