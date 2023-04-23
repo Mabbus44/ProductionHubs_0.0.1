@@ -9,10 +9,10 @@ if (test-path "c:\temp\ProductionHubs") {
 xcopy ".\*" "c:\temp\ProductionHubs\" /exclude:deployExcludes.txt /y /s
 
 #Remove "Dev" from info file
-(Get-Content "c:\temp\ProductionHubs\info.json") -replace 'ProductionHubsDev', 'ProductionHubs' | Out-File "c:\temp\ProductionHubs\info.json"
+(Get-Content "c:\temp\ProductionHubs\info.json") -replace 'ProductionHubsDev', 'ProductionHubs' | Out-File -Encoding ascii "c:\temp\ProductionHubs\info.json"
 
 #Set "release" to true in globals file
-(Get-Content "c:\temp\ProductionHubs\control\globals.lua") -replace 'prodHubs.release = false', 'prodHubs.release = true' | Out-File "c:\temp\ProductionHubs\control\globals.lua"
+(Get-Content "c:\temp\ProductionHubs\control\globals.lua") -replace 'prodHubs.release = false', 'prodHubs.release = true' | Out-File -Encoding ascii "c:\temp\ProductionHubs\control\globals.lua"
 
 #Get version from info file
 $infoJson = (Get-Content "c:\temp\ProductionHubs\info.json")
