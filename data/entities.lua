@@ -66,7 +66,7 @@ vault.close_sound = nil
 vault.circuit_wire_connection_point = nil
 vault.circuit_connector_sprites = nil
 vault.circuit_wire_max_distance = nil
-vault.picture = {filename="__ProductionHubs__/graphics/vault.png", width = 128, height = 94}
+vault.picture = {filename=prodHubs.modPath .. "/graphics/vault.png", width = 128, height = 94}
 vault.collision_box = {{-1.7, -1.7}, {1.7, 1.7}}
 vault.selection_box = {{-2, -2}, {2, 2}}
 vault.inventory_type = "with_filters_and_bar"
@@ -83,5 +83,5 @@ picker.name = "prodHubs-picker"
 picker.localised_name = {"prodHubs-picker"}
 picker.collision_box = nil
 picker.collision_mask = nil
-picker.picture = {filename="__ProductionHubs__/graphics/icons/crosshair.png", width = 64, height = 64}
+picker.picture = {filename=prodHubs.modPath.."/graphics/icons/crosshair.png", width = 64, height = 64}
 data:extend{picker}

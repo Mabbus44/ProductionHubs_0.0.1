@@ -3,7 +3,7 @@ item = table.deepcopy(data.raw["item"]["assembling-machine-1"])
 item.name = "prodHubs-vault"
 item.localised_name = {"prodHubs-vault"}
 item.place_result = "prodHubs-vault"
-item.icon = "__ProductionHubs__/graphics/icons/vault.png",
+item.icon = prodHubs.modPath.."/graphics/icons/vault.png",
 data:extend{item}
 
 -- Picker for picking points on the map

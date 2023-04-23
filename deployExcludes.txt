@@ -1,0 +1,5 @@
+.git
+.gitattributes
+deploy.ps1
+deployExcludes.txt
+Resource spawning.xlsx
