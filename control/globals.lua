@@ -1,7 +1,17 @@
 require("util")
 prodHubs = {}
+prodHubs.release = false
+
 prodHubs.debug = 0												-- Debug 1 = level 0. Debug 2 = level 0 + args. Debug 3 = level 1...
 																					-- Debug Level 0 = Called, 1 = Called often, 2 = Called periodically
+
+if prodHubs.release then
+	prodHubs.modPath = "__ProductionHubs__"
+	prodHubs.debug = 0
+else
+	prodHubs.modPath = "__ProductionHubsDev__"
+end
+
 prodHubs.ticksPerSecond = 60							-- The speed at which factorio runs
 prodHubs.popGrowthMode = {STABILE = 0, GROW = 1, BOOST = 2}
 prodHubs.batchCost = {

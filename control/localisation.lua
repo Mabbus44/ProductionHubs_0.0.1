@@ -7,7 +7,10 @@ function prodHubs.saveTranslation(event)
 	prodHubs.logF("saveTranslation ", {event})
   if not event.translated then return end
   if global.translations[event.player_index] == nil then global.translations[event.player_index] = {} end
-  global.translations[event.player_index][event.localised_string[1]] = event.result
+  if event.localised_string[1] ~= nil then
+    global.translations[event.player_index][event.localised_string[1]] = event.result
+  end
+  log(prodHubs.log(event.localised_string))
 end
 
 function prodHubs.loadTranslation(player_index, localisedString)
